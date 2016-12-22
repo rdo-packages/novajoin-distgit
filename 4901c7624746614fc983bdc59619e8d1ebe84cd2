@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fab399f4_cefea338",
+        "filename": "python-novajoin.spec",
+        "patchSetId": 11
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T18:19:28Z",
+      "side": 1,
+      "message": "openstack-utils is just and administrator helper and openstack services shouldn\u0027t depend on it unless it\u0027s justified.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 31
+      },
+      "revId": "4901c7624746614fc983bdc59619e8d1ebe84cd2",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fab399f4_eefb6745",
+        "filename": "python-novajoin.spec",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T18:19:28Z",
+      "side": 1,
+      "message": "It\u0027d be convenient to align indentation for all BuildRequires",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 42
+      },
+      "revId": "4901c7624746614fc983bdc59619e8d1ebe84cd2",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fab399f4_ae016f3b",
+        "filename": "python-novajoin.spec",
+        "patchSetId": 11
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T18:19:28Z",
+      "side": 1,
+      "message": "You can remove these five buildrequires",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 30
+      },
+      "revId": "4901c7624746614fc983bdc59619e8d1ebe84cd2",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
