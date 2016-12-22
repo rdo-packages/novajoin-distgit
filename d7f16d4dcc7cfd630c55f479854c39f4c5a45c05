@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fab399f4_ae5def4a",
+        "filename": "python-novajoin.spec",
+        "patchSetId": 12
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 113
+      },
+      "writtenOn": "2016-12-22T18:42:59Z",
+      "side": 1,
+      "message": "The tests subpackage should have the test-requirements as Requires: . Otherwise, when we install the package we will not be able to run any tests due to missing python modules.",
+      "revId": "d7f16d4dcc7cfd630c55f479854c39f4c5a45c05",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
