@@ -109,6 +109,9 @@ rm -f *requirements.txt
 
 %py2_build
 
+# Generate config file
+PYTHONPATH=. oslo-config-generator --config-file=files/novajoin-config-generator.conf
+
 # generate html docs
 sphinx-build doc/source html
 # remove the sphinx-build leftovers
@@ -127,8 +130,8 @@ install -d -m 755 %{buildroot}%{_localstatedir}/log/novajoin
 install -p -D -m 644 %{SOURCE1} %{buildroot}%{_unitdir}/novajoin-notify.service
 install -p -D -m 644 %{SOURCE2} %{buildroot}%{_unitdir}/novajoin-server.service
 
-# Install config files
-install -p -D -m 640 files/join.conf.template %{buildroot}%{_sysconfdir}/nova/join.conf
+# Install generated config file
+install -p -D -m 640 files/join.conf %{buildroot}%{_sysconfdir}/nova/join.conf
 
 # install log rotation configuration
 install -p -D -m 644 -p %{SOURCE3} \
@@ -143,6 +146,7 @@ install -p -D -m 644 -p %{SOURCE3} \
 %doc html
 %{python2_sitelib}/%{service}
 %{python2_sitelib}/%{service}-*.egg-info
+%config(noreplace) %attr(-, root, nova) %{_sysconfdir}/nova/cloud-config-novajoin.json
 %config(noreplace) %attr(-, root, nova) %{_sysconfdir}/nova/join-api-paste.ini
 %config(noreplace) %attr(-, root, nova) %{_sysconfdir}/nova/join.conf
 %{_libexecdir}/novajoin-ipa-setup
@@ -150,9 +154,7 @@ install -p -D -m 644 -p %{SOURCE3} \
 %{_sbindir}/novajoin-notify
 %{_sbindir}/novajoin-server
 %dir %{_datarootdir}/novajoin
-%{_datarootdir}/novajoin/cloud-config.json
 %{_datarootdir}/novajoin/freeipa.json
-%{_datarootdir}/novajoin/join.conf.template
 %{_mandir}/man1/novajoin-install.1.gz
 %{_mandir}/man1/novajoin-notify.1.gz
 %{_mandir}/man1/novajoin-server.1.gz
