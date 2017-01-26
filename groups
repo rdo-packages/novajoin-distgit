@@ -1,5 +1,5 @@
-# UUID          Group Name
-False 	Non-Interactive Users
-1b8c4da32687cf255ff30f30a6ff22afeddb916c       	openstack/novajoin-distgit-core
-d3230417a5fa944b4dcf304246c66cf96d1e80ae        	openstack/novajoin-distgit-ptl
-global:Registered-Users		Registered Users
+# UUID                                  	Group Name
+#
+1b8c4da32687cf255ff30f30a6ff22afeddb916c	openstack/novajoin-distgit-core
+d3230417a5fa944b4dcf304246c66cf96d1e80ae	openstack/novajoin-distgit-ptl
+global:Registered-Users                 	Registered Users
