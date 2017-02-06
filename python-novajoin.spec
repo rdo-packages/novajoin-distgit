@@ -20,18 +20,18 @@ Requires:       python-webob
 Requires:       python-paste
 Requires:       python-routes
 Requires:       python-six
-Requires:       python-keystoneclient
-Requires:       python-keystoneauth1
-Requires:       python-oslo-concurrency
-Requires:       python-oslo-messaging
-Requires:       python-oslo-policy
-Requires:       python-oslo-serialization
-Requires:       python-oslo-service
-Requires:       python-oslo-utils
-Requires:       python-neutronclient
-Requires:       python-novaclient
-Requires:       python-cinderclient
-Requires:       python-glanceclient
+Requires:       python-keystoneclient >= 1:1.7.0
+Requires:       python-keystoneauth1 >= 2.7.0
+Requires:       python-oslo-concurrency >= 3.8.0
+Requires:       python-oslo-messaging >= 5.2.0
+Requires:       python-oslo-policy >= 1.9.0
+Requires:       python-oslo-serialization >= 1.10.0
+Requires:       python-oslo-service >= 1.10.0
+Requires:       python-oslo-utils >= 3.14.0
+Requires:       python-neutronclient >= 4.2.0
+Requires:       python-novaclient >= 1:2.29.0
+Requires:       python-cinderclient >= 1.6.0
+Requires:       python-glanceclient >= 1:2.0.0
 
 # this is the package that creates the nova user
 Requires:       openstack-nova-common
