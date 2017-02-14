@@ -3,8 +3,8 @@
 %global service novajoin
 
 Name:           python-%{service}
-Version:        XXX
-Release:        XXX
+Version:        1.0.11
+Release:        1%{?dist}
 Summary:        Nova integration to enroll IPA clients
 
 License:        ASL 2.0
@@ -180,3 +180,6 @@ install -p -D -m 644 -p %{SOURCE3} \
 %systemd_postun_with_restart novajoin-server.service novajoin-notify.service
 
 %changelog
+* Tue Feb 14 2017 Alfredo Moralejo <amoralej@redhat.com> 1.0.11-1
+- Update to 1.0.11
+
