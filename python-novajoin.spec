@@ -4,7 +4,7 @@
 
 Name:           python-%{service}
 Version:        1.0.11
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Nova integration to enroll IPA clients
 
 License:        ASL 2.0
@@ -194,6 +194,9 @@ rm -rf html/_static/fonts
 %systemd_postun_with_restart novajoin-server.service novajoin-notify.service
 
 %changelog
+* Wed Mar 22 2017 Haïkel Guémar <hguemar@fedoraproject.org> - 1.0.11-2
+- Split documentation into separate subpackage
+
 * Tue Feb 14 2017 Alfredo Moralejo <amoralej@redhat.com> 1.0.11-1
 - Update to 1.0.11
 
