@@ -60,9 +60,6 @@ BuildRequires:  openstack-nova-common
 BuildRequires:  python2-devel
 BuildRequires:  python-pbr
 BuildRequires:  python-setuptools
-BuildRequires:  python-sphinx
-BuildRequires:  python-oslo-sphinx
-BuildRequires:  python-sphinx_rtd_theme
 BuildRequires:  git
 BuildRequires:  systemd
 BuildRequires:  systemd-units
@@ -100,6 +97,16 @@ Requires:       python-os-testr
 %description -n python-%{service}-tests-unit
 Unit test files for the novajoin service.
 
+%package doc
+Summary:        Documentation for %{service}
+BuildRequires:  python-sphinx
+BuildRequires:  python-oslo-sphinx
+BuildRequires:  python-sphinx_rtd_theme
+
+%description doc
+Documentation for %{service}
+
+
 %prep
 %autosetup -n %{service}-%{upstream_version} -S git
 
@@ -133,17 +140,18 @@ install -p -D -m 644 %{SOURCE2} %{buildroot}%{_unitdir}/novajoin-server.service
 # Install generated config file
 install -p -D -m 640 files/join.conf %{buildroot}%{_sysconfdir}/nova/join.conf
 
-# install log rotation configuration
+# Install log rotation configuration
 install -p -D -m 644 -p %{SOURCE3} \
   %{buildroot}%{_sysconfdir}/logrotate.d/novajoin
+
+# Remove bundled fonts
+rm -rf html/_static/fonts
 
 %check
 %{__python2} setup.py test
 
 %files -n python-%{service}
 %license LICENSE
-%doc README.md
-%doc html
 %{python2_sitelib}/%{service}
 %{python2_sitelib}/%{service}-*.egg-info
 %config(noreplace) %attr(-, root, nova) %{_sysconfdir}/nova/cloud-config-novajoin.json
@@ -168,6 +176,12 @@ install -p -D -m 644 -p %{SOURCE3} \
 %license LICENSE
 %{python2_sitelib}/%{service}/test.*
 %{python2_sitelib}/%{service}/tests
+
+
+%files doc
+%license LICENSE
+%doc README.md
+%doc html
 
 
 %post
