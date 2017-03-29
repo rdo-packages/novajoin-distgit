@@ -142,7 +142,7 @@ install -p -D -m 644 -p %{SOURCE3} \
 
 %files -n python-%{service}
 %license LICENSE
-%doc README.md
+%doc README.rst
 %doc html
 %{python2_sitelib}/%{service}
 %{python2_sitelib}/%{service}-*.egg-info
