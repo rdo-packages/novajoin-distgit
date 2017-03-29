@@ -183,3 +183,4 @@ install -p -D -m 644 -p %{SOURCE3} \
 * Tue Feb 14 2017 Alfredo Moralejo <amoralej@redhat.com> 1.0.11-1
 - Update to 1.0.11
 
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/novajoin/commit/?id=b5f5ad703ff6ddae76f919cc709aed49d1c7232e
