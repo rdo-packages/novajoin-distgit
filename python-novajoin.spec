@@ -180,3 +180,4 @@ install -p -D -m 644 -p %{SOURCE3} \
 %systemd_postun_with_restart novajoin-server.service novajoin-notify.service
 
 %changelog
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/novajoin/commit/?id=886dae3ad8b1880dcd114723814f22da099db0a1
