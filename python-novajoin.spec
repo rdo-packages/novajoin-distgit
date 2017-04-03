@@ -32,6 +32,7 @@ Requires:       python-neutronclient >= 4.2.0
 Requires:       python-novaclient >= 1:2.29.0
 Requires:       python-cinderclient >= 1.6.0
 Requires:       python-glanceclient >= 1:2.0.0
+Requires:       python-keystonemiddleware >= 4.12.0
 
 # this is the package that creates the nova user
 Requires:       openstack-nova-common
