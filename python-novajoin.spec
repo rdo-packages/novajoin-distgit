@@ -34,8 +34,6 @@ Requires:       python-cinderclient >= 1.6.0
 Requires:       python-glanceclient >= 1:2.0.0
 Requires:       python-keystonemiddleware >= 4.12.0
 
-# this is the package that creates the nova user
-Requires:       openstack-nova-common
 Requires:       ipa-admintools
 Requires(post): systemd
 Requires(preun): systemd
@@ -57,7 +55,6 @@ BuildRequires:  python-neutronclient
 BuildRequires:  python-novaclient
 BuildRequires:  python-cinderclient
 BuildRequires:  python-glanceclient
-BuildRequires:  openstack-nova-common
 BuildRequires:  python2-devel
 BuildRequires:  python-pbr
 BuildRequires:  python-setuptools
@@ -132,7 +129,7 @@ install -p -D -m 644 %{SOURCE1} %{buildroot}%{_unitdir}/novajoin-notify.service
 install -p -D -m 644 %{SOURCE2} %{buildroot}%{_unitdir}/novajoin-server.service
 
 # Install generated config file
-install -p -D -m 640 files/join.conf %{buildroot}%{_sysconfdir}/nova/join.conf
+install -p -D -m 640 files/join.conf %{buildroot}%{_sysconfdir}/novajoin/join.conf
 
 # install log rotation configuration
 install -p -D -m 644 -p %{SOURCE3} \
@@ -141,15 +138,22 @@ install -p -D -m 644 -p %{SOURCE3} \
 %check
 %{__python2} setup.py test
 
+%pre
+getent group novajoin >/dev/null || groupadd -r novajoin
+getent passwd novajoin >/dev/null || \
+useradd -r -g novajoin -d %{_sharedstatedir}/novajoin -s /sbin/nologin \
+-c "OpenStack novajoin Daemons" novajoin
+exit 0
+
 %files -n python-%{service}
 %license LICENSE
 %doc README.rst
 %doc html
 %{python2_sitelib}/%{service}
 %{python2_sitelib}/%{service}-*.egg-info
-%config(noreplace) %attr(-, root, nova) %{_sysconfdir}/nova/cloud-config-novajoin.json
-%config(noreplace) %attr(-, root, nova) %{_sysconfdir}/nova/join-api-paste.ini
-%config(noreplace) %attr(-, root, nova) %{_sysconfdir}/nova/join.conf
+%config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/cloud-config-novajoin.json
+%config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/join-api-paste.ini
+%config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/join.conf
 %{_libexecdir}/novajoin-ipa-setup
 %{_sbindir}/novajoin-install
 %{_sbindir}/novajoin-notify
@@ -160,7 +164,7 @@ install -p -D -m 644 -p %{SOURCE3} \
 %{_mandir}/man1/novajoin-notify.1.gz
 %{_mandir}/man1/novajoin-server.1.gz
 %{_unitdir}/*.service
-%attr(0700,nova,nova) %dir %{_localstatedir}/log/novajoin
+%attr(0755,novajoin,novajoin) %dir %{_localstatedir}/log/novajoin
 %config(noreplace) %{_sysconfdir}/logrotate.d/novajoin
 %exclude %{python2_sitelib}/%{service}/test.*
 %exclude %{python2_sitelib}/%{service}/tests
