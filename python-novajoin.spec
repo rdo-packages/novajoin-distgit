@@ -156,8 +156,8 @@ exit 0
 %config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/join.conf
 %{_libexecdir}/novajoin-ipa-setup
 %{_sbindir}/novajoin-install
-%{_sbindir}/novajoin-notify
-%{_sbindir}/novajoin-server
+%{_bindir}/novajoin-notify
+%{_bindir}/novajoin-server
 %dir %{_datarootdir}/novajoin
 %{_datarootdir}/novajoin/freeipa.json
 %{_mandir}/man1/novajoin-install.1.gz

@@ -6,7 +6,7 @@ After=syslog.target network.target
 TimeoutStartSec=0
 Restart=always
 User=novajoin
-ExecStart=/usr/sbin/novajoin-notify
+ExecStart=/usr/bin/novajoin-notify
 
 [Install]
 WantedBy=multi-user.target
