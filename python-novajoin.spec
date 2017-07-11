@@ -1,5 +1,7 @@
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
+%global with_doc 1
+
 %global service novajoin
 
 Name:           python-%{service}
@@ -58,9 +60,6 @@ BuildRequires:  python-glanceclient
 BuildRequires:  python2-devel
 BuildRequires:  python-pbr
 BuildRequires:  python-setuptools
-BuildRequires:  python-sphinx
-BuildRequires:  python-oslo-sphinx
-BuildRequires:  python-sphinx_rtd_theme
 BuildRequires:  git
 BuildRequires:  systemd
 BuildRequires:  systemd-units
@@ -75,6 +74,11 @@ BuildRequires:  python-testrepository
 BuildRequires:  python-testresources
 BuildRequires:  python-testscenarios
 BuildRequires:  python-os-testr
+%if 0%{?with_doc}
+BuildRequires:  python-oslo-sphinx
+BuildRequires:  python-sphinx
+BuildRequires:  python-sphinx_rtd_theme
+%endif
 
 %description
 A nova vendordata plugin for the OpenStack nova metadata
@@ -110,10 +114,12 @@ rm -f *requirements.txt
 # Generate config file
 PYTHONPATH=. oslo-config-generator --config-file=files/novajoin-config-generator.conf
 
+%if 0%{?with_doc}
 # generate html docs
 sphinx-build doc/source html
 # remove the sphinx-build leftovers
 rm -rf html/.{doctrees,buildinfo}
+%endif
 
 %install
 %py2_install
@@ -148,7 +154,9 @@ exit 0
 %files -n python-%{service}
 %license LICENSE
 %doc README.rst
+%if 0%{?with_doc}
 %doc html
+%endif
 %{python2_sitelib}/%{service}
 %{python2_sitelib}/%{service}-*.egg-info
 %config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/cloud-config-novajoin.json
