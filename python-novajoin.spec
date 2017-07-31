@@ -65,7 +65,6 @@ BuildRequires:  systemd
 BuildRequires:  systemd-units
 BuildRequires:  python-hacking
 BuildRequires:  python-anyjson
-BuildRequires:  python-coverage
 BuildRequires:  python-fixtures
 BuildRequires:  python-mock
 BuildRequires:  python-subunit
@@ -89,7 +88,6 @@ Summary:        Unit tests for novajoin
 Requires:       python-%{service} = %{version}-%{release}
 
 Requires:       python-anyjson
-Requires:       python-coverage
 Requires:       python-fixtures
 Requires:       python-mock
 Requires:       python-subunit
