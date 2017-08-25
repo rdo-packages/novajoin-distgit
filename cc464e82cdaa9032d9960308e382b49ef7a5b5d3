@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a890539_0b45d56f",
+        "filename": "python-novajoin.spec",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 113
+      },
+      "writtenOn": "2017-08-25T15:42:28Z",
+      "side": 1,
+      "message": "%{buildroot} is also missing here",
+      "revId": "cc464e82cdaa9032d9960308e382b49ef7a5b5d3",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
