@@ -191,3 +191,4 @@ exit 0
 %systemd_postun_with_restart novajoin-server.service novajoin-notify.service
 
 %changelog
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/novajoin/commit/?id=8e78935e25b4fcab5a7028473a673a05ecc4ae63
