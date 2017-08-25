@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a890539_8bf2a598",
+        "filename": "python-novajoin.spec",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 113
+      },
+      "writtenOn": "2017-08-25T14:56:21Z",
+      "side": 1,
+      "message": "This should be %{buildroot}%{_unitdir} to install the files inside the build root.",
+      "revId": "9db143ebd714d6d21a3f0a983dca82e63bdb3100",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
