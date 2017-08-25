@@ -12,9 +12,7 @@ Summary:        Nova integration to enroll IPA clients
 License:        ASL 2.0
 URL:            https://launchpad.net/novajoin
 Source0:        https://tarballs.openstack.org/%{service}/%{service}-%{version}.tar.gz
-Source1:        novajoin-notify.service
-Source2:        novajoin-server.service
-Source3:        novajoin.logrotate
+Source1:        novajoin.logrotate
 
 BuildArch:      noarch
 
@@ -128,16 +126,18 @@ install -d -m 755 %{buildroot}%{_datadir}/%{service}
 install -d -m 755 %{buildroot}%{_sharedstatedir}/%{service}
 install -d -m 755 %{buildroot}%{_localstatedir}/log/novajoin
 
-# Install systemd service files
-install -p -D -m 644 %{SOURCE1} %{buildroot}%{_unitdir}/novajoin-notify.service
-install -p -D -m 644 %{SOURCE2} %{buildroot}%{_unitdir}/novajoin-server.service
-
 # Install generated config file
 install -p -D -m 640 files/join.conf %{buildroot}%{_sysconfdir}/novajoin/join.conf
 
 # install log rotation configuration
-install -p -D -m 644 -p %{SOURCE3} \
+install -p -D -m 644 -p %{SOURCE1} \
   %{buildroot}%{_sysconfdir}/logrotate.d/novajoin
+
+# Install the upstream-provided systemd unit files
+install -p -D -m 644 %{_datarootdir}/novajoin/novajoin-notify.service \
+  %{_unitdir}
+install -p -D -m 644 %{_datarootdir}/novajoin/novajoin-server.service \
+  %{_unitdir}
 
 %check
 %{__python2} setup.py test
