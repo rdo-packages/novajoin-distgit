@@ -35,9 +35,7 @@ Requires:       python-glanceclient >= 1:2.0.0
 Requires:       python-keystonemiddleware >= 4.12.0
 
 Requires:       ipa-admintools
-Requires(post): systemd
-Requires(preun): systemd
-Requires(postun): systemd
+%{?systemd_requires}
 
 BuildRequires:  python-webob
 BuildRequires:  python-paste
