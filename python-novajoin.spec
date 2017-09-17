@@ -69,6 +69,7 @@ BuildRequires:  python-testrepository
 BuildRequires:  python-testresources
 BuildRequires:  python-testscenarios
 BuildRequires:  python-os-testr
+BuildRequires:  openstack-macros
 %if 0%{?with_doc}
 BuildRequires:  python-oslo-sphinx
 BuildRequires:  python-sphinx
@@ -99,7 +100,7 @@ Unit test files for the novajoin service.
 %prep
 %autosetup -n %{service}-%{upstream_version} -S git
 
-rm -f *requirements.txt
+%py_req_cleanup
 
 %build
 
