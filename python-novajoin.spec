@@ -1,3 +1,4 @@
+
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
 %global with_doc 1
@@ -70,11 +71,6 @@ BuildRequires:  python-testresources
 BuildRequires:  python-testscenarios
 BuildRequires:  python-os-testr
 BuildRequires:  openstack-macros
-%if 0%{?with_doc}
-BuildRequires:  python-oslo-sphinx
-BuildRequires:  python-sphinx
-BuildRequires:  python-sphinx_rtd_theme
-%endif
 
 %description
 A nova vendordata plugin for the OpenStack nova metadata
@@ -96,6 +92,20 @@ Requires:       python-os-testr
 
 %description -n python-%{service}-tests-unit
 Unit test files for the novajoin service.
+
+%if 0%{?with_doc}
+%package -n %{name}-doc
+Summary:        %{name} documentation
+
+BuildRequires:  python-oslo-sphinx
+BuildRequires:  python-sphinx
+BuildRequires:  python-sphinx_rtd_theme
+
+%description -n %{name}-doc
+%{common_desc}
+
+It contains the documentation for Novajoin.
+%endif
 
 %prep
 %autosetup -n %{service}-%{upstream_version} -S git
@@ -153,9 +163,6 @@ exit 0
 %files -n python-%{service}
 %license LICENSE
 %doc README.rst
-%if 0%{?with_doc}
-%doc html
-%endif
 %{python2_sitelib}/%{service}
 %{python2_sitelib}/%{service}-*.egg-info
 %config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/cloud-config-novajoin.json
@@ -191,5 +198,11 @@ exit 0
 
 %postun
 %systemd_postun_with_restart novajoin-server.service novajoin-notify.service
+%if 0%{?with_doc}
+
+%files -n %{name}-doc
+%doc html
+%license LICENSE
+%endif
 
 %changelog
