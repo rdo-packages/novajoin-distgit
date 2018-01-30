@@ -58,7 +58,6 @@ BuildRequires:  python-pbr
 BuildRequires:  python-setuptools
 BuildRequires:  git
 BuildRequires:  systemd
-BuildRequires:  systemd-units
 BuildRequires:  python-hacking
 BuildRequires:  python-anyjson
 BuildRequires:  python-fixtures
