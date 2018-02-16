@@ -19,55 +19,56 @@ BuildArch:      noarch
 Requires:       python-webob
 Requires:       python-paste
 Requires:       python-routes
-Requires:       python-six
-Requires:       python-keystoneclient >= 1:1.7.0
-Requires:       python-keystoneauth1 >= 2.7.0
-Requires:       python-oslo-concurrency >= 3.8.0
-Requires:       python-oslo-messaging >= 5.2.0
-Requires:       python-oslo-policy >= 1.9.0
-Requires:       python-oslo-serialization >= 1.10.0
-Requires:       python-oslo-service >= 1.10.0
-Requires:       python-oslo-utils >= 3.14.0
-Requires:       python-neutronclient >= 4.2.0
-Requires:       python-novaclient >= 1:2.29.0
-Requires:       python-cinderclient >= 1.6.0
-Requires:       python-glanceclient >= 1:2.0.0
-Requires:       python-keystonemiddleware >= 4.12.0
+Requires:       python2-six
+Requires:       python2-keystoneclient >= 1:3.8.0
+Requires:       python2-keystoneauth1 >= 3.3.0
+Requires:       python2-oslo-concurrency >= 3.25.0
+Requires:       python2-oslo-messaging >= 5.29.0
+Requires:       python2-oslo-policy >= 1.30.0
+Requires:       python2-oslo-serialization >= 2.18.0
+Requires:       python2-oslo-service >= 1.24.0
+Requires:       python2-oslo-utils >= 3.33.0
+Requires:       python2-neutronclient >= 6.3.0
+Requires:       python2-novaclient >= 1:9.1.0
+Requires:       python2-cinderclient >= 3.3.0
+Requires:       python2-glanceclient >= 1:2.8.0
+Requires:       python2-keystonemiddleware >= 4.17.0
+Requires:       python-cachetools >= 2.0.0
 
 Requires:       ipa-admintools
 %{?systemd_requires}
 
 BuildRequires:  python-webob
 BuildRequires:  python-paste
-BuildRequires:  python-routes
-BuildRequires:  python-six
-BuildRequires:  python-keystoneclient
-BuildRequires:  python-keystoneauth1
-BuildRequires:  python-oslo-concurrency
-BuildRequires:  python-oslo-messaging
-BuildRequires:  python-oslo-policy
-BuildRequires:  python-oslo-serialization
-BuildRequires:  python-oslo-service
-BuildRequires:  python-oslo-utils
-BuildRequires:  python-neutronclient
-BuildRequires:  python-novaclient
-BuildRequires:  python-cinderclient
-BuildRequires:  python-glanceclient
+BuildRequires:  python2-routes
+BuildRequires:  python2-six
+BuildRequires:  python2-keystoneclient
+BuildRequires:  python2-keystoneauth1
+BuildRequires:  python2-oslo-concurrency
+BuildRequires:  python2-oslo-messaging
+BuildRequires:  python2-oslo-policy
+BuildRequires:  python2-oslo-serialization
+BuildRequires:  python2-oslo-service
+BuildRequires:  python2-oslo-utils
+BuildRequires:  python2-neutronclient
+BuildRequires:  python2-novaclient
+BuildRequires:  python2-cinderclient
+BuildRequires:  python2-glanceclient
 BuildRequires:  python2-devel
-BuildRequires:  python-pbr
-BuildRequires:  python-setuptools
+BuildRequires:  python2-pbr
+BuildRequires:  python2-setuptools
 BuildRequires:  git
 BuildRequires:  systemd
-BuildRequires:  python-hacking
+BuildRequires:  python2-hacking
 BuildRequires:  python-anyjson
-BuildRequires:  python-fixtures
-BuildRequires:  python-mock
-BuildRequires:  python-subunit
-BuildRequires:  python-testtools
-BuildRequires:  python-testrepository
-BuildRequires:  python-testresources
-BuildRequires:  python-testscenarios
-BuildRequires:  python-os-testr
+BuildRequires:  python2-fixtures
+BuildRequires:  python2-mock
+BuildRequires:  python2-subunit
+BuildRequires:  python2-testtools
+BuildRequires:  python2-testrepository
+BuildRequires:  python2-testresources
+BuildRequires:  python2-testscenarios
+BuildRequires:  python2-os-testr
 BuildRequires:  openstack-macros
 
 %description
@@ -79,14 +80,14 @@ Summary:        Unit tests for novajoin
 Requires:       python-%{service} = %{version}-%{release}
 
 Requires:       python-anyjson
-Requires:       python-fixtures
-Requires:       python-mock
-Requires:       python-subunit
-Requires:       python-testtools
-Requires:       python-testrepository
-Requires:       python-testresources
-Requires:       python-testscenarios
-Requires:       python-os-testr
+Requires:       python2-fixtures
+Requires:       python2-mock
+Requires:       python2-subunit
+Requires:       python2-testtools
+Requires:       python2-testrepository
+Requires:       python2-testresources
+Requires:       python2-testscenarios
+Requires:       python2-os-testr
 
 %description -n python-%{service}-tests-unit
 Unit test files for the novajoin service.
@@ -95,8 +96,8 @@ Unit test files for the novajoin service.
 %package -n %{name}-doc
 Summary:        %{name} documentation
 
-BuildRequires:  python-oslo-sphinx
-BuildRequires:  python-sphinx
+BuildRequires:  python2-oslo-sphinx
+BuildRequires:  python2-sphinx
 BuildRequires:  python-sphinx_rtd_theme
 
 %description -n %{name}-doc
