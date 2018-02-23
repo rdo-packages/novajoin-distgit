@@ -5,8 +5,8 @@
 %global service novajoin
 
 Name:           python-%{service}
-Version:        XXX
-Release:        XXX
+Version:        1.0.18
+Release:        1%{?dist}
 Summary:        Nova integration to enroll IPA clients
 
 License:        ASL 2.0
@@ -205,3 +205,6 @@ exit 0
 %endif
 
 %changelog
+* Fri Feb 23 2018 RDO <dev@lists.rdoproject.org> 1.0.18-1
+- Update to 1.0.18
+
