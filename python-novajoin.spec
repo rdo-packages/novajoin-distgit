@@ -21,14 +21,14 @@ Requires:       python-paste
 Requires:       python-routes
 Requires:       python2-six
 Requires:       python2-keystoneclient >= 1:3.8.0
-Requires:       python2-keystoneauth1 >= 3.3.0
+Requires:       python2-keystoneauth1 >= 3.4.0
 Requires:       python2-oslo-concurrency >= 3.25.0
 Requires:       python2-oslo-messaging >= 5.29.0
 Requires:       python2-oslo-policy >= 1.30.0
 Requires:       python2-oslo-serialization >= 2.18.0
 Requires:       python2-oslo-service >= 1.24.0
 Requires:       python2-oslo-utils >= 3.33.0
-Requires:       python2-neutronclient >= 6.3.0
+Requires:       python2-neutronclient >= 6.7.0
 Requires:       python2-novaclient >= 1:9.1.0
 Requires:       python2-cinderclient >= 3.3.0
 Requires:       python2-glanceclient >= 1:2.8.0
