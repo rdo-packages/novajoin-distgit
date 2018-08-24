@@ -176,6 +176,7 @@ exit 0
 %{_mandir}/man1/novajoin-install.1.gz
 %{_mandir}/man1/novajoin-notify.1.gz
 %{_mandir}/man1/novajoin-server.1.gz
+%dir %{_sharedstatedir}/novajoin
 %{_unitdir}/novajoin-server.service
 %{_unitdir}/novajoin-notify.service
 %attr(0755,novajoin,novajoin) %dir %{_localstatedir}/log/novajoin
