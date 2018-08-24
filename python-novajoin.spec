@@ -180,6 +180,7 @@ exit 0
 %{_unitdir}/novajoin-server.service
 %{_unitdir}/novajoin-notify.service
 %attr(0755,novajoin,novajoin) %dir %{_localstatedir}/log/novajoin
+%attr(0755,novajoin,novajoin) %dir %{_sharedstatedir}/novajoin
 %config(noreplace) %{_sysconfdir}/logrotate.d/novajoin
 %exclude %{python2_sitelib}/%{service}/test.*
 %exclude %{python2_sitelib}/%{service}/tests
