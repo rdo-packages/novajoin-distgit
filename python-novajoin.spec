@@ -157,6 +157,8 @@ getent group novajoin >/dev/null || groupadd -r novajoin
 getent passwd novajoin >/dev/null || \
 useradd -r -g novajoin -d %{_sharedstatedir}/novajoin -s /sbin/nologin \
 -c "OpenStack novajoin Daemons" novajoin
+mkdir -p %{_sharedstatedir}/novajoin
+chown novajoin: %{_sharedstatedir}/novajoin
 exit 0
 
 %files -n python-%{service}
