@@ -200,3 +200,4 @@ exit 0
 * Thu Aug 24 2017 Alfredo Moralejo <amoralej@redhat.com> 1.0.15-1
 - Update to 1.0.15
 
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/novajoin/commit/?id=2ffc08c5446feb19cdd98bcebbdc8eea11ec3ada
