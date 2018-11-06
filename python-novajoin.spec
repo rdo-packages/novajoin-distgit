@@ -142,7 +142,7 @@ rm -f %{buildroot}%{_datarootdir}/novajoin/novajoin-notify.service
 rm -f %{buildroot}%{_datarootdir}/novajoin/novajoin-server.service
 
 %check
-%{__python2} setup.py test
+stestr run
 
 %pre
 getent group novajoin >/dev/null || groupadd -r novajoin
