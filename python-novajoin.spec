@@ -68,7 +68,7 @@ BuildRequires:  python2-testtools
 BuildRequires:  python2-testrepository
 BuildRequires:  python2-testresources
 BuildRequires:  python2-testscenarios
-BuildRequires:  python2-os-testr
+BuildRequires:  python2-stestr
 BuildRequires:  openstack-macros
 
 %description
@@ -150,7 +150,7 @@ rm -f %{buildroot}%{_datarootdir}/novajoin/novajoin-notify.service
 rm -f %{buildroot}%{_datarootdir}/novajoin/novajoin-server.service
 
 %check
-%{__python2} setup.py test
+stestr run
 
 %pre
 getent group novajoin >/dev/null || groupadd -r novajoin
