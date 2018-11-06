@@ -94,7 +94,7 @@ BuildRequires:  python%{pyver}-testtools
 BuildRequires:  python%{pyver}-testrepository
 BuildRequires:  python%{pyver}-testresources
 BuildRequires:  python%{pyver}-testscenarios
-BuildRequires:  python%{pyver}-os-testr
+BuildRequires:  python%{pyver}-stestr
 BuildRequires:  openstack-macros
 
 # Handle python2 exception
@@ -201,7 +201,7 @@ rm -f %{buildroot}%{_datarootdir}/novajoin/novajoin-notify.service
 rm -f %{buildroot}%{_datarootdir}/novajoin/novajoin-server.service
 
 %check
-PYTHON=%{pyver_bin} %{pyver_bin} setup.py test
+PYTHON=%{pyver_bin} stestr-%{pyver} run
 
 %pre -n python%{pyver}-%{service}
 getent group novajoin >/dev/null || groupadd -r novajoin
