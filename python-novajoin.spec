@@ -5,7 +5,7 @@
 %global service novajoin
 
 Name:           python-%{service}
-Version:        1.0.18
+Version:        1.0.21
 Release:        1%{?dist}
 Summary:        Nova integration to enroll IPA clients
 
@@ -205,6 +205,9 @@ exit 0
 %endif
 
 %changelog
+* Mon Nov 19 2018 RDO <dev@lists.rdoproject.org> 1.0.21-1
+- Update to 1.0.21
+
 * Fri Feb 23 2018 RDO <dev@lists.rdoproject.org> 1.0.18-1
 - Update to 1.0.18
 
