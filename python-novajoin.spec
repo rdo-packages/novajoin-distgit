@@ -208,3 +208,4 @@ exit 0
 * Fri Feb 23 2018 RDO <dev@lists.rdoproject.org> 1.0.18-1
 - Update to 1.0.18
 
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/novajoin/commit/?id=7db12e58df5027b7ad72364a2837aea00a1e1f08
