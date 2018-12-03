@@ -218,8 +218,8 @@ exit 0
 %config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/cloud-config-novajoin.json
 %config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/join-api-paste.ini
 %config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/join.conf
-%{_libexecdir}/novajoin-ipa-setup
-%{_sbindir}/novajoin-install
+%{_bindir}/novajoin-ipa-setup
+%{_bindir}/novajoin-install
 %{_bindir}/novajoin-notify
 %{_bindir}/novajoin-server
 %dir %{_datarootdir}/novajoin
