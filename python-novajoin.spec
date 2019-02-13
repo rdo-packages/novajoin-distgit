@@ -5,7 +5,7 @@
 %global service novajoin
 
 Name:           python-%{service}
-Version:        1.0.18
+Version:        1.1.1
 Release:        1%{?dist}
 Summary:        Nova integration to enroll IPA clients
 
