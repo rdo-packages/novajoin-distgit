@@ -6,7 +6,7 @@
 
 Name:           python-%{service}
 Version:        1.1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Nova integration to enroll IPA clients
 
 License:        ASL 2.0
