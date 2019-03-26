@@ -39,6 +39,7 @@ Requires:       python%{pyver}-webob
 Requires:       python%{pyver}-six
 Requires:       python%{pyver}-keystoneclient >= 1:3.8.0
 Requires:       python%{pyver}-keystoneauth1 >= 3.4.0
+Requires:       python%{pyver}-oslo-config >= 6.1.0
 Requires:       python%{pyver}-oslo-concurrency >= 3.25.0
 Requires:       python%{pyver}-oslo-messaging >= 5.29.0
 Requires:       python%{pyver}-oslo-policy >= 1.30.0
