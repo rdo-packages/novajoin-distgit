@@ -38,7 +38,7 @@ Summary:        Nova integration to enroll IPA clients
 Requires:       python%{pyver}-webob
 Requires:       python%{pyver}-six
 Requires:       python%{pyver}-keystoneclient >= 1:3.8.0
-Requires:       python%{pyver}-keystoneauth1 >= 3.4.0
+Requires:       python%{pyver}-keystoneauth1 >= 3.3.0
 Requires:       python%{pyver}-oslo-config >= 6.1.0
 Requires:       python%{pyver}-oslo-concurrency >= 3.25.0
 Requires:       python%{pyver}-oslo-messaging >= 5.29.0
@@ -46,7 +46,7 @@ Requires:       python%{pyver}-oslo-policy >= 1.30.0
 Requires:       python%{pyver}-oslo-serialization >= 2.18.0
 Requires:       python%{pyver}-oslo-service >= 1.24.0
 Requires:       python%{pyver}-oslo-utils >= 3.33.0
-Requires:       python%{pyver}-neutronclient >= 6.7.0
+Requires:       python%{pyver}-neutronclient >= 6.3.0
 Requires:       python%{pyver}-novaclient >= 1:9.1.0
 Requires:       python%{pyver}-cinderclient >= 3.3.0
 Requires:       python%{pyver}-glanceclient >= 1:2.8.0
