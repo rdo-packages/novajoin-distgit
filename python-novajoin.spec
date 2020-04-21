@@ -1,14 +1,3 @@
-# Macros for py2/py3 compatibility
-%if 0%{?fedora} || 0%{?rhel} > 7
-%global pyver %{python3_pkgversion}
-%else
-%global pyver 2
-%endif
-%global pyver_bin python%{pyver}
-%global pyver_sitelib %python%{pyver}_sitelib
-%global pyver_install %py%{pyver}_install
-%global pyver_build %py%{pyver}_build
-# End of macros for py2/py3 compatibility
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
 %global with_doc 1
@@ -31,39 +20,32 @@ BuildArch:      noarch
 A nova vendordata plugin for the OpenStack nova metadata
 service to manage host instantiation in an IPA server.
 
-%package -n     python%{pyver}-%{service}
+%package -n     python3-%{service}
 Summary:        Nova integration to enroll IPA clients
-%{?python_provide:%python_provide python%{pyver}-%{service}}
+%{?python_provide:%python_provide python3-%{service}}
 
-Requires:       python%{pyver}-webob
-Requires:       python%{pyver}-six
-Requires:       python%{pyver}-keystoneclient >= 1:3.8.0
-Requires:       python%{pyver}-keystoneauth1 >= 3.3.0
-Requires:       python%{pyver}-oslo-config >= 6.1.0
-Requires:       python%{pyver}-oslo-concurrency >= 3.25.0
-Requires:       python%{pyver}-oslo-messaging >= 5.29.0
-Requires:       python%{pyver}-oslo-policy >= 1.30.0
-Requires:       python%{pyver}-oslo-serialization >= 2.18.0
-Requires:       python%{pyver}-oslo-service >= 1.24.0
-Requires:       python%{pyver}-oslo-utils >= 3.33.0
-Requires:       python%{pyver}-neutronclient >= 6.3.0
-Requires:       python%{pyver}-novaclient >= 1:9.1.0
-Requires:       python%{pyver}-cinderclient >= 3.3.0
-Requires:       python%{pyver}-glanceclient >= 1:2.8.0
-Requires:       python%{pyver}-keystonemiddleware >= 4.17.0
+Requires:       python3-webob
+Requires:       python3-six
+Requires:       python3-keystoneclient >= 1:3.8.0
+Requires:       python3-keystoneauth1 >= 3.3.0
+Requires:       python3-oslo-config >= 6.1.0
+Requires:       python3-oslo-concurrency >= 3.25.0
+Requires:       python3-oslo-messaging >= 5.29.0
+Requires:       python3-oslo-policy >= 1.30.0
+Requires:       python3-oslo-serialization >= 2.18.0
+Requires:       python3-oslo-service >= 1.24.0
+Requires:       python3-oslo-utils >= 3.33.0
+Requires:       python3-neutronclient >= 6.3.0
+Requires:       python3-novaclient >= 1:9.1.0
+Requires:       python3-cinderclient >= 3.3.0
+Requires:       python3-glanceclient >= 1:2.8.0
+Requires:       python3-keystonemiddleware >= 4.17.0
 
 Requires:       ipa-admintools
 
-# Handle python2 exception
-%if %{pyver} == 2
-Requires:       python-paste
-Requires:       python-routes
-Requires:       python-cachetools >= 2.0.0
-%else
-Requires:       python%{pyver}-paste
-Requires:       python%{pyver}-routes
-Requires:       python%{pyver}-cachetools >= 2.0.0
-%endif
+Requires:       python3-paste
+Requires:       python3-routes
+Requires:       python3-cachetools >= 2.0.0
 
 %if 0%{?rhel} && 0%{?rhel} < 8
 %{?systemd_requires}
@@ -71,92 +53,75 @@ Requires:       python%{pyver}-cachetools >= 2.0.0
 %{?systemd_ordering} # does not exist on EL7
 %endif
 
-BuildRequires:  python%{pyver}-webob
-BuildRequires:  python%{pyver}-routes
-BuildRequires:  python%{pyver}-six
-BuildRequires:  python%{pyver}-keystoneclient
-BuildRequires:  python%{pyver}-keystoneauth1
-BuildRequires:  python%{pyver}-oslo-concurrency
-BuildRequires:  python%{pyver}-oslo-messaging
-BuildRequires:  python%{pyver}-oslo-policy
-BuildRequires:  python%{pyver}-oslo-serialization
-BuildRequires:  python%{pyver}-oslo-service
-BuildRequires:  python%{pyver}-oslo-utils
-BuildRequires:  python%{pyver}-neutronclient
-BuildRequires:  python%{pyver}-novaclient
-BuildRequires:  python%{pyver}-cinderclient
-BuildRequires:  python%{pyver}-glanceclient
-BuildRequires:  python%{pyver}-devel
-BuildRequires:  python%{pyver}-pbr
-BuildRequires:  python%{pyver}-setuptools
+BuildRequires:  python3-webob
+BuildRequires:  python3-routes
+BuildRequires:  python3-six
+BuildRequires:  python3-keystoneclient
+BuildRequires:  python3-keystoneauth1
+BuildRequires:  python3-oslo-concurrency
+BuildRequires:  python3-oslo-messaging
+BuildRequires:  python3-oslo-policy
+BuildRequires:  python3-oslo-serialization
+BuildRequires:  python3-oslo-service
+BuildRequires:  python3-oslo-utils
+BuildRequires:  python3-neutronclient
+BuildRequires:  python3-novaclient
+BuildRequires:  python3-cinderclient
+BuildRequires:  python3-glanceclient
+BuildRequires:  python3-devel
+BuildRequires:  python3-pbr
+BuildRequires:  python3-setuptools
 BuildRequires:  git
 BuildRequires:  systemd
-BuildRequires:  python%{pyver}-hacking
-BuildRequires:  python%{pyver}-fixtures
-BuildRequires:  python%{pyver}-mock
-BuildRequires:  python%{pyver}-subunit
-BuildRequires:  python%{pyver}-testtools
-BuildRequires:  python%{pyver}-testrepository
-BuildRequires:  python%{pyver}-testresources
-BuildRequires:  python%{pyver}-testscenarios
-BuildRequires:  python%{pyver}-stestr
+BuildRequires:  python3-hacking
+BuildRequires:  python3-fixtures
+BuildRequires:  python3-mock
+BuildRequires:  python3-subunit
+BuildRequires:  python3-testtools
+BuildRequires:  python3-testrepository
+BuildRequires:  python3-testresources
+BuildRequires:  python3-testscenarios
+BuildRequires:  python3-stestr
 BuildRequires:  openstack-macros
 
-# Handle python2 exception
-%if %{pyver} == 2
-BuildRequires:  python-paste
-BuildRequires:  python-anyjson
-BuildRequires:  python-sphinx_rtd_theme
-%else
-BuildRequires:  python%{pyver}-paste
-BuildRequires:  python%{pyver}-anyjson
-BuildRequires:  python%{pyver}-sphinx_rtd_theme
-%endif
+BuildRequires:  python3-paste
+BuildRequires:  python3-anyjson
+BuildRequires:  python3-sphinx_rtd_theme
 
-%description -n python%{pyver}-%{service}
+%description -n python3-%{service}
 A nova vendordata plugin for the OpenStack nova metadata
 service to manage host instantiation in an IPA server.
 
-%package -n python%{pyver}-%{service}-tests-unit
+%package -n python3-%{service}-tests-unit
 Summary:        Unit tests for novajoin
-%{?python_provide:%python_provide python%{pyver}-%{service}-tests-unit}
-Requires:       python%{pyver}-%{service} = %{version}-%{release}
+%{?python_provide:%python_provide python3-%{service}-tests-unit}
+Requires:       python3-%{service} = %{version}-%{release}
 
-Requires:       python%{pyver}-fixtures
-Requires:       python%{pyver}-mock
-Requires:       python%{pyver}-subunit
-Requires:       python%{pyver}-testtools
-Requires:       python%{pyver}-testrepository
-Requires:       python%{pyver}-testresources
-Requires:       python%{pyver}-testscenarios
-Requires:       python%{pyver}-os-testr
-# Handle python2 exception
-%if %{pyver} == 2
-Requires:       python-anyjson
-%else
-Requires:       python%{pyver}-anyjson
-%endif
+Requires:       python3-fixtures
+Requires:       python3-mock
+Requires:       python3-subunit
+Requires:       python3-testtools
+Requires:       python3-testrepository
+Requires:       python3-testresources
+Requires:       python3-testscenarios
+Requires:       python3-os-testr
+Requires:       python3-anyjson
 
 
-%description -n python%{pyver}-%{service}-tests-unit
+%description -n python3-%{service}-tests-unit
 Unit test files for the novajoin service.
 
 %if 0%{?with_doc}
-%package -n python%{pyver}-%{service}-doc
+%package -n python3-%{service}-doc
 Summary:        %{name} documentation
-%{?python_provide:%python_provide python%{pyver}-%{service}-doc}
+%{?python_provide:%python_provide python3-%{service}-doc}
 
-BuildRequires:  python%{pyver}-oslo-sphinx
-BuildRequires:  python%{pyver}-sphinx
+BuildRequires:  python3-oslo-sphinx
+BuildRequires:  python3-sphinx
 
-# Handle python2 exception
-%if %{pyver} == 2
-BuildRequires:  python-sphinx_rtd_theme
-%else
-BuildRequires:  python%{pyver}-sphinx_rtd_theme
-%endif
+BuildRequires:  python3-sphinx_rtd_theme
 
-%description -n python%{pyver}-%{service}-doc
+%description -n python3-%{service}-doc
 %{common_desc}
 
 It contains the documentation for Novajoin.
@@ -169,20 +134,20 @@ It contains the documentation for Novajoin.
 
 %build
 
-%{pyver_build}
+%{py3_build}
 
 # Generate config file
-PYTHONPATH=. oslo-config-generator-%{pyver} --config-file=files/novajoin-config-generator.conf
+PYTHONPATH=. oslo-config-generator --config-file=files/novajoin-config-generator.conf
 
 %if 0%{?with_doc}
 # generate html docs
-sphinx-build-%{pyver} doc/source html
-# remove the sphinx-build-%{pyver} leftovers
+sphinx-build doc/source html
+# remove the sphinx-build leftovers
 rm -rf html/.{doctrees,buildinfo}
 %endif
 
 %install
-%{pyver_install}
+%{py3_install}
 
 # Setup directories
 install -d -m 755 %{buildroot}%{_mandir}/man1
@@ -206,20 +171,20 @@ rm -f %{buildroot}%{_datarootdir}/novajoin/novajoin-notify.service
 rm -f %{buildroot}%{_datarootdir}/novajoin/novajoin-server.service
 
 %check
-PYTHON=%{pyver_bin} stestr-%{pyver} run
+PYTHON=%{__python3} stestr run
 
-%pre -n python%{pyver}-%{service}
+%pre -n python3-%{service}
 getent group novajoin >/dev/null || groupadd -r novajoin
 getent passwd novajoin >/dev/null || \
 useradd -r -g novajoin -d %{_sharedstatedir}/novajoin -s /sbin/nologin \
 -c "OpenStack novajoin Daemons" novajoin
 exit 0
 
-%files -n python%{pyver}-%{service}
+%files -n python3-%{service}
 %license LICENSE
 %doc README.rst
-%{pyver_sitelib}/%{service}
-%{pyver_sitelib}/%{service}-*.egg-info
+%{python3_sitelib}/%{service}
+%{python3_sitelib}/%{service}-*.egg-info
 %config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/cloud-config-novajoin.json
 %config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/join-api-paste.ini
 %config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/join.conf
@@ -238,26 +203,26 @@ exit 0
 %attr(0755,novajoin,novajoin) %dir %{_localstatedir}/log/novajoin
 %attr(0755,novajoin,novajoin) %dir %{_sharedstatedir}/novajoin
 %config(noreplace) %{_sysconfdir}/logrotate.d/novajoin
-%exclude %{pyver_sitelib}/%{service}/test.*
-%exclude %{pyver_sitelib}/%{service}/tests
+%exclude %{python3_sitelib}/%{service}/test.*
+%exclude %{python3_sitelib}/%{service}/tests
 
-%files -n python%{pyver}-%{service}-tests-unit
+%files -n python3-%{service}-tests-unit
 %license LICENSE
-%{pyver_sitelib}/%{service}/test.*
-%{pyver_sitelib}/%{service}/tests
+%{python3_sitelib}/%{service}/test.*
+%{python3_sitelib}/%{service}/tests
 
 
-%post -n python%{pyver}-%{service}
+%post -n python3-%{service}
 %systemd_post novajoin-server.service novajoin-notify.service
 
-%preun -n python%{pyver}-%{service}
+%preun -n python3-%{service}
 %systemd_preun novajoin-server.service novajoin-notify.service
 
-%postun -n python%{pyver}-%{service}
+%postun -n python3-%{service}
 %systemd_postun_with_restart novajoin-server.service novajoin-notify.service
 
 %if 0%{?with_doc}
-%files -n python%{pyver}-%{service}-doc
+%files -n python3-%{service}-doc
 %doc html
 %license LICENSE
 %endif
