@@ -84,7 +84,7 @@ BuildRequires:  python3-glanceclient
 BuildRequires:  python3-devel
 BuildRequires:  python3-pbr
 BuildRequires:  python3-setuptools
-BuildRequires:  git
+BuildRequires:  git-core
 BuildRequires:  systemd
 BuildRequires:  python3-hacking
 BuildRequires:  python3-fixtures
