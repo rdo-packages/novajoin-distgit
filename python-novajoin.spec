@@ -59,6 +59,7 @@ Requires:       ipa-admintools
 Requires:       python3-paste
 Requires:       python3-routes
 Requires:       python3-cachetools >= 2.0.0
+Requires:       python3-memcached >= 1.59
 
 %if 0%{?rhel} && 0%{?rhel} < 8
 %{?systemd_requires}
