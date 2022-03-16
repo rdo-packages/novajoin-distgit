@@ -1,5 +1,5 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
-%global sources_gpg_sign 0x2426b928085a020d8a90d0d879ab7008d0896c8a
+%global sources_gpg_sign 0xbba3b1e67a7303dd1769d34595bf2e4d09004514
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
 %global with_doc 1
@@ -7,8 +7,8 @@
 %global service novajoin
 
 Name:           python-%{service}
-Version:        XXX
-Release:        XXX
+Version:        1.3.0
+Release:        1%{?dist}
 Summary:        Nova integration to enroll IPA clients
 
 License:        ASL 2.0
@@ -246,3 +246,6 @@ exit 0
 %endif
 
 %changelog
+* Wed Mar 16 2022 RDO <dev@lists.rdoproject.org> 1.3.0-1
+- Update to 1.3.0
+
