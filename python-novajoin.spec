@@ -1,6 +1,12 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
 %global sources_gpg_sign 0x2426b928085a020d8a90d0d879ab7008d0896c8a
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
+# we are excluding some BRs from automatic generator
+%global excluded_brs doc8 bandit pre-commit hacking flake8-import-order pylint
+# Exclude sphinx from BRs if docs are disabled
+%if ! 0%{?with_doc}
+%global excluded_brs %{excluded_brs} sphinx openstackdocstheme
+%endif
 
 %global with_doc 1
 
@@ -11,7 +17,7 @@ Version:        XXX
 Release:        XXX
 Summary:        Nova integration to enroll IPA clients
 
-License:        ASL 2.0
+License:        Apache-2.0
 URL:            https://launchpad.net/novajoin
 Source0:        https://tarballs.openstack.org/%{service}/%{service}-%{version}.tar.gz
 Source1:        novajoin.logrotate
@@ -35,72 +41,16 @@ service to manage host instantiation in an IPA server.
 
 %package -n     python3-%{service}
 Summary:        Nova integration to enroll IPA clients
-%{?python_provide:%python_provide python3-%{service}}
-
-Requires:       python3-webob
-Requires:       python3-six
-Requires:       python3-keystoneclient >= 1:3.8.0
-Requires:       python3-keystoneauth1 >= 3.3.0
-Requires:       python3-oslo-config >= 6.1.0
-Requires:       python3-oslo-concurrency >= 3.25.0
-Requires:       python3-oslo-messaging >= 5.29.0
-Requires:       python3-oslo-policy >= 1.30.0
-Requires:       python3-oslo-serialization >= 2.18.0
-Requires:       python3-oslo-service >= 1.24.0
-Requires:       python3-oslo-utils >= 3.33.0
-Requires:       python3-neutronclient >= 6.3.0
-Requires:       python3-novaclient >= 1:9.1.0
-Requires:       python3-cinderclient >= 3.3.0
-Requires:       python3-glanceclient >= 1:2.8.0
-Requires:       python3-keystonemiddleware >= 4.17.0
 
 Requires:       ipa-admintools
 
-Requires:       python3-paste
-Requires:       python3-routes
-Requires:       python3-cachetools >= 2.0.0
-Requires:       python3-memcached >= 1.59
+%{?systemd_ordering}
 
-%if 0%{?rhel} && 0%{?rhel} < 8
-%{?systemd_requires}
-%else
-%{?systemd_ordering} # does not exist on EL7
-%endif
-
-BuildRequires:  python3-webob
-BuildRequires:  python3-routes
-BuildRequires:  python3-six
-BuildRequires:  python3-keystoneclient
-BuildRequires:  python3-keystoneauth1
-BuildRequires:  python3-oslo-concurrency
-BuildRequires:  python3-oslo-messaging
-BuildRequires:  python3-oslo-policy
-BuildRequires:  python3-oslo-serialization
-BuildRequires:  python3-oslo-service
-BuildRequires:  python3-oslo-utils
-BuildRequires:  python3-neutronclient
-BuildRequires:  python3-novaclient
-BuildRequires:  python3-cinderclient
-BuildRequires:  python3-glanceclient
 BuildRequires:  python3-devel
-BuildRequires:  python3-pbr
-BuildRequires:  python3-setuptools
+BuildRequires:  pyproject-rpm-macros
 BuildRequires:  git-core
 BuildRequires:  systemd
-BuildRequires:  python3-hacking
-BuildRequires:  python3-fixtures
-BuildRequires:  python3-mock
-BuildRequires:  python3-subunit
-BuildRequires:  python3-testtools
-BuildRequires:  python3-testrepository
-BuildRequires:  python3-testresources
-BuildRequires:  python3-testscenarios
-BuildRequires:  python3-stestr
 BuildRequires:  openstack-macros
-
-BuildRequires:  python3-paste
-BuildRequires:  python3-anyjson
-BuildRequires:  python3-sphinx_rtd_theme
 
 %description -n python3-%{service}
 A nova vendordata plugin for the OpenStack nova metadata
@@ -108,7 +58,6 @@ service to manage host instantiation in an IPA server.
 
 %package -n python3-%{service}-tests-unit
 Summary:        Unit tests for novajoin
-%{?python_provide:%python_provide python3-%{service}-tests-unit}
 Requires:       python3-%{service} = %{version}-%{release}
 
 Requires:       python3-fixtures
@@ -128,10 +77,6 @@ Unit test files for the novajoin service.
 %if 0%{?with_doc}
 %package -n python3-%{service}-doc
 Summary:        %{name} documentation
-%{?python_provide:%python_provide python3-%{service}-doc}
-
-BuildRequires:  python3-oslo-sphinx
-BuildRequires:  python3-sphinx
 
 BuildRequires:  python3-sphinx_rtd_theme
 
@@ -148,24 +93,46 @@ It contains the documentation for Novajoin.
 %endif
 %autosetup -n %{service}-%{upstream_version} -S git
 
-%py_req_cleanup
+
+sed -i /^[[:space:]]*-c{env:.*_CONSTRAINTS_FILE.*/d tox.ini
+sed -i "s/^deps = -c{env:.*_CONSTRAINTS_FILE.*/deps =/" tox.ini
+sed -i /^minversion.*/d tox.ini
+sed -i /^requires.*virtualenv.*/d tox.ini
+sed -i '/oslo.versionedobjects\[fixtures\]/d' tox.ini
+
+# Exclude some bad-known BRs
+for pkg in %{excluded_brs}; do
+  for reqfile in doc/requirements.txt test-requirements.txt; do
+    if [ -f $reqfile ]; then
+      sed -i /^${pkg}.*/d $reqfile
+    fi
+  done
+done
+
+# Automatic BR generation
+%generate_buildrequires
+%if 0%{?with_doc}
+  %pyproject_buildrequires -t -e %{default_toxenv},docs
+%else
+  %pyproject_buildrequires -t -e %{default_toxenv}
+%endif
 
 %build
 
-%{py3_build}
+%pyproject_wheel
 
 # Generate config file
 PYTHONPATH=. oslo-config-generator --config-file=files/novajoin-config-generator.conf
 
 %if 0%{?with_doc}
 # generate html docs
-sphinx-build doc/source html
+%tox -e docs
 # remove the sphinx-build leftovers
 rm -rf html/.{doctrees,buildinfo}
 %endif
 
 %install
-%{py3_install}
+%pyproject_install
 
 # Setup directories
 install -d -m 755 %{buildroot}%{_mandir}/man1
@@ -189,7 +156,7 @@ rm -f %{buildroot}%{_datarootdir}/novajoin/novajoin-notify.service
 rm -f %{buildroot}%{_datarootdir}/novajoin/novajoin-server.service
 
 %check
-PYTHON=%{__python3} stestr run
+%tox -e %{default_toxenv}
 
 %pre -n python3-%{service}
 getent group novajoin >/dev/null || groupadd -r novajoin
@@ -202,7 +169,7 @@ exit 0
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/%{service}
-%{python3_sitelib}/%{service}-*.egg-info
+%{python3_sitelib}/%{service}-*.dist-info
 %config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/cloud-config-novajoin.json
 %config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/join-api-paste.ini
 %config(noreplace) %attr(-, root, novajoin) %{_sysconfdir}/novajoin/join.conf
@@ -241,7 +208,7 @@ exit 0
 
 %if 0%{?with_doc}
 %files -n python3-%{service}-doc
-%doc html
+%doc doc/build/html
 %license LICENSE
 %endif
 
